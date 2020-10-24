@@ -78,7 +78,7 @@ SELECT o.order_id AS 'Order ID',
 	o.order_date AS 'Order date',
 	c.name AS 'Customer name',
 	c.phone_number AS 'Customer phone',
-	SUM(i.price) AS 'Total',
+	SUM(ior.price_each * ior.quantity) AS 'Total',
 	GROUP_CONCAT(i.name SEPARATOR ', ') AS 'Items bought'
 FROM orders o
 INNER JOIN customers c USING(customer_id)
