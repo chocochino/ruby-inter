@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1><%= item.name %></h1>
+
+  <table>
+    <tr>
+      <td class="food-detail">Price</td>
+      <td class="food-detail"><%= item.price %></td>
+    </tr>
+    <tr>
+      <td class="food-detail">Category</td>
+      <td class="food-detail"><%= item.category.name %></td>
+    </tr>
+  </table>
+
+  <button class="create-button">
+    <a href="/<%= item.id %>/edit" class="plain-link">Edit Food</a>
+  </button>
+  <button class="cancel-button">
+    <a href="/" class="white-link">Back</a>
+  </button>
+</body>
+</html>

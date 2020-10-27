@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>Create new food</title>
+</head>
+<body>
+  <h1>New Food</h1>
+  
+  <form action='/create' method='POST'>
+    <label for="item_name">Name</label>
+    <input type="text" id="item_name" name="item_name" required>
+    
+    <label for="item_price">Price</label>
+    <input type="text" id="item_price" name="item_price" required>
+    
+    <input type="submit" value="Create Food" class="create-button">
+    <button class="cancel-button">
+      <a href="/" class="white-link">Back</a>
+    </button>
+  </form>
+  
+</body>
+</html>

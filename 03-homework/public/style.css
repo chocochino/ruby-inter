@@ -1,0 +1,85 @@
+h1 {
+  color: darkslategrey;
+}
+
+table {
+  font-family: sans-serif;
+  text-align: left;
+  border-spacing: 0;
+}
+
+th {
+  background-color: teal;
+  color: aliceblue;
+  text-align: center;
+}
+
+th, td {
+  padding: 0.5em 1em;
+}
+
+tr {
+  border-bottom: 1px solid;
+}
+
+.food-list:nth-child(even) {
+  background-color: antiquewhite;
+}
+
+.plain-link {
+  text-decoration: none;
+  color: darkslategrey;
+}
+
+.plain-link:hover {
+  color: lightslategrey;
+}
+
+.create-button {
+  background-color: antiquewhite;
+  font-size: 14px;
+  padding: 0.7em;
+  border: 1px solid teal;
+  margin: 12px 0;
+}
+
+.create-button:hover {
+  background-color: bisque;
+}
+
+.cancel-button {
+  background-color: tomato;
+  color: white;
+  font-size: 14px;
+  padding: 0.7em 1.2em;
+  border: 1px solid red;
+  margin: 12px;
+}
+
+.cancel-button:hover {
+  background-color: coral;
+}
+
+.white-link {
+  text-decoration: none;
+  color: white;
+}
+
+form {
+  width: 50%;
+  padding: 1em;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.5em 0;
+}
+
+label {
+  font-family: sans-serif;
+}
+
+.food-detail:nth-child(odd) {
+  color: teal;
+}
