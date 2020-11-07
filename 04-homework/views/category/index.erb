@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Category list</title>
+  </head>
+  <body>
+    <h1>Categories</h1>
+
+    <button class="create-button">
+      <a href="/categories/new" class="plain-link">New Category</a>
+    </button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th colspan="3">Action</th>
+        </tr>
+      </thead>    
+      <tbody>
+        <% categories.each do |category| %>
+          <tr class="food-list">
+            <td><%= category.name %></td>
+            <td><a href="/categories/<%= category.id %>" class="plain-link">Show</a></td>
+            <td><a href="/categories/<%= category.id %>/edit" class="plain-link">Edit</a></td>
+            <td>
+              <form action="/categories/<%= category.id %>" method="POST" style="padding: 0;">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" value="Delete">
+              </form>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </body>
+</html>

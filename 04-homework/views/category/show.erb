@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>Category: <%= category.name %></title>
+</head>
+<body>
+  <h1><%= category.name %></h1>
+
+  <h3>Item list</h3>
+  <ul><% category.items.each do |item| %>
+    <li><%= item.name %>
+  <% end %></ul>
+
+  <button class="create-button">
+    <a href="/categories/<%= category.id %>/edit" class="plain-link">Edit Category</a>
+  </button>
+  <button class="cancel-button">
+    <a href="/categories" class="white-link">Back</a>
+  </button>
+</body>
+</html>
