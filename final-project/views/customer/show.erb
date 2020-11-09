@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%# <link rel="stylesheet" href="/style.css"> %>
+  <title>Customer: <%= customer.name %></title>
+</head>
+<body>
+  <h1><%= customer.name %></h1>
+
+  <p>Phone number: <%= customer.phone %></p>
+  <p>ID: <%= customer.id %></p>
+
+  <button class="create-button">
+    <a href="/customers/<%= customer.id %>/edit" class="plain-link">Edit Customer</a>
+  </button>
+  <button class="cancel-button">
+    <a href="/customers" class="white-link">Back</a>
+  </button>
+</body>
+</html>
