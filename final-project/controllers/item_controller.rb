@@ -1,45 +1,45 @@
-require './models/customer.rb'
+require './models/item.rb'
 
-class CustomerController
+class ItemController
 
   def index
-    customers = Customer.get_all
-    renderer = ERB.new(File.read('./views/customer/index.erb'))
+    items = Item.get_all
+    renderer = ERB.new(File.read('./views/item/index.erb'))
     renderer.result(binding)
   end
 
   def show(id)
-    customer = Customer.get_one(id)
-    unless customer then
+    item = Item.get_one(id)
+    unless item then
       renderer = ERB.new(File.read('./views/error.erb'))  
     else
-      renderer = ERB.new(File.read('./views/customer/show.erb'))
+      renderer = ERB.new(File.read('./views/item/show.erb'))
     end
     renderer.result(binding)
   end
   
   def new_entry
-    renderer = ERB.new(File.read('./views/customer/new.erb'))
+    renderer = ERB.new(File.read('./views/item/new.erb'))
     renderer.result(binding)
   end
 
   def edit(id)
-    customer = Customer.get_one(id)
-    unless customer then
+    item = Item.get_one(id)
+    unless item then
       renderer = ERB.new(File.read('./views/error.erb'))  
     else
-      renderer = ERB.new(File.read('./views/customer/edit.erb'))
+      renderer = ERB.new(File.read('./views/item/edit.erb'))
     end
     renderer.result(binding)
   end  
 
   def create(params)
-    customer = Customer.new(
+    item = Item.new(
       :name => params["name"],
-      :phone => params["phone"]
+      :price => params["price"]
     )
     
-    if customer.save then
+    if item.save then
       index
     else 
       renderer = ERB.new(File.read('./views/error.erb'))
@@ -48,13 +48,13 @@ class CustomerController
   end
 
   def update(params)
-    customer = Customer.new(
+    item = Item.new(
       :id => params["id"],
       :name => params["name"],
-      :phone => params["phone"]
+      :price => params["price"]
     )
     
-    if customer.update then
+    if item.update then
       index
     else 
       renderer = ERB.new(File.read('./views/error.erb'))
@@ -63,7 +63,7 @@ class CustomerController
   end
 
   def delete(id)
-    Customer.delete(id)
+    Item.delete(id)
     index
   end
 

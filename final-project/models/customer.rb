@@ -23,11 +23,24 @@ class Customer
     customer = self.convert_query_to_object(raw_data)
   end
 
+  def self.delete(id)
+    client = create_db_client
+    client.query("delete from customers where customer_id = #{id}")
+  end
+
   def save
     return false unless valid?
     
     client = create_db_client
     client.query("insert into customers(name, phone) values ('#{@name}', '#{@phone}');")
+    true
+  end
+
+  def update
+    return false unless valid?
+    
+    client = create_db_client
+    client.query("update customers set name = '#{@name}', phone = '#{@phone}' where customer_id = '#{@id}';")
     true
   end
 

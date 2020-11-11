@@ -5,8 +5,8 @@ def create_db_client
     :host => "localhost",
     :username => ENV["DB_USERNAME"],
     :password => ENV["DB_PASSWORD"],
-    :database => "rubyinter"
-    # :database => "rubyinter_test"
+    # :database => "rubyinter"
+    :database => "rubyinter_test"
   )
 
   client

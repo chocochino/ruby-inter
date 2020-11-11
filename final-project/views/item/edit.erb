@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%# <link rel="stylesheet" href="/style.css"> %>
+  <title>Create new item</title>
+</head>
+<body>
+  <h1>New item</h1>
+  
+  <form action='/items/<%= item.id %>' method='POST'>
+    <input type="hidden" name="_method" value="PUT">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="<%= item.name%>" required>
+    <br>
+
+    <label for="price">Price</label>
+    <input type="text" id="price" name="price" value="<%= item.price%>" required>
+    <br>
+
+    <input type="submit" value="Edit Item" class="create-button">
+    <button class="cancel-button">
+      <a href="/items" class="white-link">Back</a>
+    </button>
+  </form>
+  
+</body>
+</html>
