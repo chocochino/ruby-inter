@@ -11,12 +11,19 @@
 
   <p>Price: <%= item.price %></p>
   <p>ID: <%= item.id %></p>
+  <ul>Categories: 
+    <% item.categories.each do |category| %>
+      <li><a href="/categories/<%= category.id %>" class="plain-link">
+        <%= category.name %>
+      </a></li>
+    <% end %>
+  </ul>
 
   <button class="create-button">
     <a href="/items/<%= item.id %>/edit" class="plain-link">Edit Item</a>
   </button>
   <button class="cancel-button">
-    <a href="/items" class="white-link">Back</a>
+    <a href="/items" class="white-link">All Items</a>
   </button>
 </body>
 </html>

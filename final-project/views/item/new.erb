@@ -15,8 +15,14 @@
     <br>
 
     <label for="price">Price</label>
-    <input type="text" id="price" name="price" required>
+    <input type="number" id="price" name="price" required>
     <br>
+
+    Categories:<br>
+    <% categories.each do |category| %>
+      <input type="checkbox" id="category<%= category.id%>" name="category_<%= category.id%>" value="<%= category.id%>">
+      <label for="category<%= category.id%>"><%= category.name %></label><br>
+    <% end %>
 
     <input type="submit" value="Create Item" class="create-button">
     <button class="cancel-button">

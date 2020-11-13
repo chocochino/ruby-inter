@@ -4,11 +4,11 @@ DROP DATABASE IF EXISTS rubyinter;
 CREATE DATABASE rubyinter;
 USE rubyinter;
 
--- -- for testing
--- DROP DATABASE IF EXISTS rubyinter_test;
+-- for testing
+DROP DATABASE IF EXISTS rubyinter_test;
 
--- CREATE DATABASE rubyinter_test;
--- USE rubyinter_test;
+CREATE DATABASE rubyinter_test;
+USE rubyinter_test;
 
 CREATE TABLE customers (
 	customer_id INT NOT NULL AUTO_INCREMENT,
@@ -32,9 +32,9 @@ CREATE TABLE categories (
 
 CREATE TABLE itemCategories (
   item_id INT NOT NULL,
-  category_id INT NOT NULL,
-  FOREIGN KEY (item_id) REFERENCES items(item_id),
-  FOREIGN KEY (category_id) REFERENCES categories(category_id)
+  category_id INT NOT NULL
+  -- FOREIGN KEY (item_id) REFERENCES items(item_id),
+  -- FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
 CREATE TABLE orders (
@@ -50,9 +50,9 @@ CREATE TABLE itemOrders (
 	order_id INT NOT NULL,
 	item_id INT NOT NULL,
 	quantity INT DEFAULT 1,
-	price_each INT DEFAULT 0,
-	FOREIGN KEY (order_id) REFERENCES orders(order_id),
-	FOREIGN KEY (item_id) REFERENCES items(item_id)
+	price_each INT DEFAULT 0
+	-- FOREIGN KEY (order_id) REFERENCES orders(order_id),
+	-- FOREIGN KEY (item_id) REFERENCES items(item_id)
 );
 
 INSERT INTO customers (name, phone) VALUES
@@ -62,6 +62,12 @@ INSERT INTO customers (name, phone) VALUES
 ('Mary Jeans', '+6213243546'),
 ('John Doe', '+6200000000');
 
+INSERT INTO categories(name) VALUES
+('Food'),
+('Beverages'),
+('Sweet'),
+('Salty');
+
 INSERT INTO items (name, price) VALUES
 ('Nasi Goreng Gila', 25000),
 ('Ice Water', 2000),
@@ -70,17 +76,18 @@ INSERT INTO items (name, price) VALUES
 ('Orange Juice', 15000),
 ('Cordon Bleu', 36000);
 
-INSERT INTO categories(name) VALUES
-('Food'),
-('Beverages');
-
 INSERT INTO itemCategories(item_id, category_id) VALUES
 (1, 1),
+(1, 4),
 (2, 2),
 (3, 1),
+(3, 4),
 (4, 2),
+(4, 3),
 (5, 2),
-(6, 1);
+(5, 3),
+(6, 1),
+(6, 4);
 
 INSERT INTO orders (customer_id, order_date, order_status) VALUES
 (1, '2020-10-10', 'Completed'),

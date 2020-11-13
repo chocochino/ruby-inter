@@ -40,7 +40,7 @@ class Customer
     return false unless valid?
     
     client = create_db_client
-    client.query("update customers set name = '#{@name}', phone = '#{@phone}' where customer_id = '#{@id}';")
+    client.query("update customers set name = '#{@name}', phone = '#{@phone}' where customer_id = #{@id};")
     true
   end
 

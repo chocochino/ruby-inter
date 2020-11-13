@@ -1,13 +1,15 @@
 require './db/mysql_connector.rb'
+require './models/category.rb'
 
 class Item
 
-  attr_accessor :id, :name, :price
+  attr_accessor :id, :name, :price, :categories
 
   def initialize(hash)
     @id = hash[:id]
     @name = hash[:name]
     @price = hash[:price]
+    @categories = Array.new
   end
 
   def self.get_all
@@ -21,6 +23,10 @@ class Item
     raw_data = client.query(
       "select * from items where item_id = #{id};")
     item = self.convert_query_to_object(raw_data)
+    
+    raw_data = client.query("select io.category_id, c.name from itemCategories io inner join categories c using(category_id) where io.item_id = #{id};")
+    item.categories = Category.convert_query_to_list(raw_data)
+    item
   end
 
   def self.delete(id)
@@ -33,6 +39,15 @@ class Item
     
     client = create_db_client
     client.query("insert into items(name, price) values ('#{@name}', '#{@price}');")
+
+    raw_data = client.query("select item_id from items where name = '#{@name}';").each
+    raw_data.each { |data| @id = data["item_id"] }
+
+    if @categories.any? then
+      @categories.each do |category|
+        client.query("insert into itemCategories(item_id, category_id) values (#{@id}, #{category});")
+      end
+    end
     true
   end
 
@@ -40,7 +55,15 @@ class Item
     return false unless valid?
     
     client = create_db_client
-    client.query("update items set name = '#{@name}', price = '#{@price}' where item_id = '#{@id}';")
+    client.query("update items set name = '#{@name}', price = '#{@price}' where item_id = #{@id};")
+
+    if @categories.any? then
+      client.query("delete from itemCategories where item_id = #{@id}")
+      @categories.each do |category|
+        client.query("insert into itemCategories(item_id, category_id) values (#{@id}, #{category});")
+      end
+    end
+
     true
   end
 

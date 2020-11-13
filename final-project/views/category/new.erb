@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%# <link rel="stylesheet" href="/style.css"> %>
+  <title>Create new category</title>
+</head>
+<body>
+  <h1>New category</h1>
+  
+  <form action='/categories' method='POST'>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+
+    <input type="submit" value="Create Category" class="create-button">
+    <button class="cancel-button">
+      <a href="/categories" class="white-link">Back</a>
+    </button>
+  </form>
+  
+</body>
+</html>
