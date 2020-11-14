@@ -25,6 +25,8 @@ class Order
     client = create_db_client
     raw_data = client.query("select * from orders where is_complete = false order by order_id desc limit 1")
     order = self.convert_query_to_object(raw_data)
+    order.item_orders = ItemOrder.get_one(order.id) unless order.nil?
+    order
   end
 
   def self.get_one(id)

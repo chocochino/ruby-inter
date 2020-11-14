@@ -7,6 +7,12 @@ require './controllers/category_controller.rb'
 require './models/category.rb'
 require './controllers/order_controller.rb'
 require './models/order.rb'
+require './controllers/cart_controller.rb'
+
+
+controller = CartController.new
+controller.create
+puts "controller created"
 
 get '/' do
   return 'are you lost?'
@@ -130,16 +136,6 @@ get '/orders' do
   controller.index
 end
 
-# get '/orders/new' do
-#   controller = OrderController.new
-#   controller.new_entry
-# end
-
-# post '/orders' do
-#   controller = OrderController.new
-#   controller.create(params)
-# end
-
 get '/orders/:id' do
   controller = OrderController.new
   controller.show(params["id"])
@@ -158,4 +154,23 @@ end
 delete '/orders/:id' do
   controller = OrderController.new
   controller.delete(params["id"])
+end
+
+# Cart
+
+get '/cart' do
+  controller = CartController.new
+  controller.index
+end
+
+post '/cart/:id' do
+  controller = CartController.new
+  controller.add_item(params["id"])
+  redirect '/items'
+end
+
+post '/cart' do
+  controller = CartController.new
+  controller.checkout(params)
+  redirect '/orders'
 end

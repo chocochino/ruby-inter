@@ -92,7 +92,8 @@ class Item
       item = Item.new(
         :id => data["item_id"], 
         :name => data["name"], 
-        :price => data["price"])
+        :price => data["price"]
+      )
     end
     item
   end

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%# <link rel="stylesheet" href="/style.css"> %>
+  <title>Cart</title>
+</head>
+<body>
+  <h1>Cart for <%= cart.order_date %></h1>
+
+  <form action='/cart' method='POST'>
+    <label for="order_date">Date</label>
+    <input type="date" id="order_date" name="order_date" value="<%= cart.order_date %>">
+
+    <label for="customer">Customers</label>
+    <select class="select-bar" id="customer" name="customer">
+      <% customers.each do |customer| %>
+        <option value="<%= customer.id %>"><%= customer.name %></option>
+      <% end %>
+    </ul>
+    </select>
+
+    <h3>Items</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>    
+      <tbody>
+        <% cart.item_orders.each do |io| %>
+          <tr class="food-list">
+            <td>
+              <a href="/items/<%= io.item.id %>" class="plain-link">
+                <%= io.item.name %> 
+              </a>
+            </td>
+            <td><%= io.price_each %></td>
+            <td>
+              <input type="number" id="quantity" name="quantity_<%= io.item.id %>_<%= io.price_each %>" value="<%= io.quantity %>" required>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <input type="submit" value="Checkout Cart" class="create-button">
+    <button class="cancel-button">
+      <a href="/items" class="white-link">Back</a>
+    </button>
+  </form>
+</body>
+</html>

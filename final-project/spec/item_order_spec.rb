@@ -63,7 +63,7 @@ describe ItemOrder do
   describe '#get_one' do
     before do
       3.times do |i|
-        item_order = ItemOrder.new(:item_id => i)
+        item_order = ItemOrder.new(:item => i+1)
         item_order.save
         test_item.save
       end 
@@ -88,7 +88,6 @@ describe ItemOrder do
       to_update = ItemOrder.new(
         :order_id => old_item.order_id,
         :item => old_item.item.id,
-        :price_each => old_item.price_each,
         :quantity => new_quantity
       )
       to_update.update
@@ -108,6 +107,23 @@ describe ItemOrder do
       ItemOrder.delete(test_id, test_id)
       after_count = @client.query("select * from itemOrders where order_id = #{test_id} and item_id = #{test_id};").size
       expect(after_count).not_to eq(before_count)  
+    end
+  end
+
+  describe '#clear' do
+    before do
+      3.times do |i|
+        item_order = ItemOrder.new(:item => i+1)
+        item_order.save
+        test_item.save
+      end 
+    end
+
+    it 'deletes all itemOrders from one order_id' do
+      before_count = @client.query("select * from itemOrders where order_id = #{test_id};").size
+      ItemOrder.clear(test_id)
+      after_count = @client.query("select * from itemOrders where order_id = #{test_id};").size
+      expect(after_count).not_to eq(before_count)
     end
   end
 

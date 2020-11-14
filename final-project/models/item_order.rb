@@ -25,6 +25,11 @@ class ItemOrder
     client.query("delete from itemOrders where order_id = #{order_id} and item_id = #{item_id}")
   end
 
+  def self.clear(order_id)
+    client = create_db_client
+    client.query("delete from itemOrders where order_id = #{order_id}")
+  end
+
   def save
     return false unless valid?
 
@@ -42,7 +47,7 @@ class ItemOrder
     return false unless valid?
     
     client = create_db_client
-    client.query("update itemOrders set quantity = '#{@quantity}', price_each = '#{@price_each}' where order_id = #{@order_id} and item_id = #{@item};")
+    client.query("update itemOrders set quantity = #{@quantity} where order_id = #{@order_id} and item_id = #{@item};")
     true
   end
 
