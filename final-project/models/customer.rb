@@ -1,13 +1,15 @@
 require './db/mysql_connector.rb'
+require './models/order.rb'
 
 class Customer
 
-  attr_accessor :id, :name, :phone
+  attr_accessor :id, :name, :phone, :orders
 
   def initialize(hash)
     @id = hash[:id]
     @name = hash[:name]
     @phone = hash[:phone]
+    @orders = []
   end
 
   def self.get_all
@@ -21,6 +23,10 @@ class Customer
     raw_data = client.query(
       "select * from customers where customer_id = #{id};")
     customer = self.convert_query_to_object(raw_data)
+    raw_data = client.query(
+      "select o.order_id, o.order_date, c.customer_id, c.name from orders o inner join customers c using(customer_id) where o.customer_id = #{id};")
+    customer.orders = Order.convert_query_to_list(raw_data)
+    customer
   end
 
   def self.delete(id)
@@ -65,6 +71,7 @@ class Customer
 
   def self.convert_query_to_object(raw_data)
     customer = nil
+    orders = Array.new
     raw_data.each do |data|
       customer = Customer.new(
         :id => data["customer_id"], 

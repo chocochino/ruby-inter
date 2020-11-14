@@ -5,6 +5,8 @@ require './controllers/item_controller.rb'
 require './models/item.rb'
 require './controllers/category_controller.rb'
 require './models/category.rb'
+require './controllers/order_controller.rb'
+require './models/order.rb'
 
 get '/' do
   return 'are you lost?'
@@ -118,5 +120,42 @@ end
 
 delete '/categories/:id' do
   controller = CategoryController.new
+  controller.delete(params["id"])
+end
+
+# Orders
+
+get '/orders' do
+  controller = OrderController.new
+  controller.index
+end
+
+# get '/orders/new' do
+#   controller = OrderController.new
+#   controller.new_entry
+# end
+
+# post '/orders' do
+#   controller = OrderController.new
+#   controller.create(params)
+# end
+
+get '/orders/:id' do
+  controller = OrderController.new
+  controller.show(params["id"])
+end
+
+# get '/orders/:id/edit' do
+#   controller = OrderController.new
+#   controller.edit(params["id"])
+# end
+
+put '/orders/:id' do
+  controller = OrderController.new
+  controller.update(params)
+end
+
+delete '/orders/:id' do
+  controller = OrderController.new
   controller.delete(params["id"])
 end

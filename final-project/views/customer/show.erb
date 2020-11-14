@@ -11,12 +11,20 @@
 
   <p>Phone number: <%= customer.phone %></p>
   <p>ID: <%= customer.id %></p>
+  <ul>Orders: 
+    <% customer.orders.each do |order| %>
+      <li><a href="/orders/<%= order.id %>" class="plain-link">
+        <%= order.order_date %>
+      </a></li>
+    <% end %>
+  </ul>
+
 
   <button class="create-button">
     <a href="/customers/<%= customer.id %>/edit" class="plain-link">Edit Customer</a>
   </button>
   <button class="cancel-button">
-    <a href="/customers" class="white-link">Back</a>
+    <a href="/customers" class="white-link">All customers</a>
   </button>
 </body>
 </html>

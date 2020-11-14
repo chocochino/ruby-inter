@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%# <link rel="stylesheet" href="/style.css"> %>
+  <title>Order: <%= order.order_date %> by <%= order.customer.name %></title>
+</head>
+<body>
+  <h1><%= order.order_date %></h1>
+  
+  <p>Customer: 
+    <a href="/customers/<%= order.customer.id %>"><%= order.customer.name %></a>
+  </p>
+  <p>Phone number: <%= order.customer.phone %></p>
+  <p>ID: <%= order.id %></p>
+
+  <h3>Items</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>    
+    <tbody>
+      <% order.item_orders.each do |io| %>
+        <tr class="food-list">
+          <td>
+            <a href="/items/<%= io.item.id %>" class="plain-link">
+              <%= io.item.name %>
+            </a>
+          </td>
+          <td><%= io.price_each %></td>
+          <td><%= io.quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <button class="cancel-button">
+    <a href="/orders" class="white-link">All Orders</a>
+  </button>
+</body>
+</html>

@@ -41,7 +41,7 @@ CREATE TABLE orders (
 	order_id INT NOT NULL AUTO_INCREMENT,
 	customer_id INT,
 	order_date DATE DEFAULT CURRENT_DATE,
-	order_status VARCHAR(30) DEFAULT 'Created',
+	is_complete BOOLEAN DEFAULT FALSE,
 	PRIMARY KEY (order_id),
 	FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
@@ -89,12 +89,12 @@ INSERT INTO itemCategories(item_id, category_id) VALUES
 (6, 1),
 (6, 4);
 
-INSERT INTO orders (customer_id, order_date, order_status) VALUES
-(1, '2020-10-10', 'Completed'),
-(2, '2020-10-10', 'Completed'),
-(3, '2020-10-10', 'Completed'),
-(1, '2020-10-11', 'Completed'),
-(2, '2020-10-11', 'Completed');
+INSERT INTO orders (customer_id, order_date, is_complete) VALUES
+(1, '2020-10-10', true),
+(2, '2020-10-10', true),
+(3, '2020-10-10', true),
+(1, '2020-10-11', true),
+(2, '2020-10-11', true);
 
 INSERT INTO itemOrders (order_id, item_id, price_each) VALUES
 (1, 1, 25000),
